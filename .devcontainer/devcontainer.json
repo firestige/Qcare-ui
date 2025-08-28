@@ -1,7 +1,0 @@
-{
-  "name": "Node.js 22.18 Dev Container",
-  "build": {
-    "dockerfile": "Dockerfile"
-  },
-  "workspaceFolder": "/workspace"
-}
