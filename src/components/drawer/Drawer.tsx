@@ -8,6 +8,7 @@ import {
   useFloating,
 } from '@floating-ui/react';
 import { useSidebarStore } from '../../store';
+import clsx from 'clsx';
 
 const Drawer: React.FC = () => {
   const { isCollapsed } = useSidebarStore();
@@ -24,11 +25,42 @@ const Drawer: React.FC = () => {
   });
 
   const navigationItems = [
-    { name: '仪表板', icon: '📊', path: '/dashboard', id: 'dashboard' },
-    { name: '用户管理', icon: '👥', path: '/users', id: 'users' },
-    { name: '数据分析', icon: '📈', path: '/analytics', id: 'analytics' },
-    { name: '设置', icon: '⚙️', path: '/settings', id: 'settings' },
-    { name: '帮助', icon: '❓', path: '/help', id: 'help' },
+    {
+      name: '仪表板',
+      icon: 'icon-[noto--bar-chart]',
+      path: '/dashboard',
+      id: 'dashboard',
+    },
+    {
+      name: '集群拓扑',
+      icon: 'icon-[devicon--netbox]',
+      path: '/topology',
+      id: 'topology',
+    },
+    {
+      name: '服务列表',
+      icon: 'icon-[noto--file-cabinet]',
+      path: '/service',
+      id: 'service',
+    },
+    {
+      name: '调用链分析',
+      icon: 'icon-[noto--link]',
+      path: '/trace',
+      id: 'trace',
+    },
+    {
+      name: 'arthas',
+      icon: 'icon-[noto--microscope]',
+      path: '/arthas',
+      id: 'arthas',
+    },
+    {
+      name: '依赖分析',
+      icon: 'icon-[noto--package]',
+      path: '/dependency',
+      id: 'dependency',
+    },
   ];
 
   return (
@@ -79,7 +111,7 @@ const Drawer: React.FC = () => {
                 onMouseEnter={() => isCollapsed && setActiveTooltip(item.id)}
                 onMouseLeave={() => setActiveTooltip(null)}
               >
-                <span className="text-xl flex-shrink-0">{item.icon}</span>
+                <span className={clsx(item.icon, 'text-xl flex-shrink-0')} />
                 <motion.span
                   className="whitespace-nowrap overflow-hidden"
                   initial={{ opacity: 1, width: 'auto' }}
