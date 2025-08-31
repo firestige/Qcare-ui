@@ -98,18 +98,8 @@ const Drawer: React.FC = () => {
 
         {/* 底部版权信息 */}
         <div className="border-t border-slate-700 p-4">
-          <motion.div
-            className="text-xs text-slate-400 text-center"
-            initial={{ opacity: 1 }}
-            animate={{ opacity: isCollapsed ? 0 : 1 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="mb-1">© 2025 Qcare</div>
-            <div>All rights reserved</div>
-          </motion.div>
-
           {/* 收起时显示简化版权信息 */}
-          {isCollapsed && (
+          {isCollapsed ? (
             <motion.div
               className="text-xs text-slate-400 text-center"
               initial={{ opacity: 0 }}
@@ -117,6 +107,16 @@ const Drawer: React.FC = () => {
               transition={{ duration: 0.2, delay: 0.1 }}
             >
               ©
+            </motion.div>
+          ) : (
+            <motion.div
+              className="text-xs text-slate-400 text-center"
+              initial={{ opacity: 1 }}
+              animate={{ opacity: isCollapsed ? 0 : 1 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="mb-1">© 2025 Qcare</div>
+              <div>All rights reserved</div>
             </motion.div>
           )}
         </div>
