@@ -1,6 +1,5 @@
 import React from 'react';
 import clsx from 'clsx';
-import './tab.css';
 
 export interface TabItemProps {
   'data-key'?: string;
@@ -22,26 +21,29 @@ const Tabs: React.FC<TabsProps> = props => {
   const c = clsx('grow', className);
   const findIndex = items.findIndex(item => item['data-key'] === activeKey);
   const renderPanel = () => {
-    return items.map(item => (
-      <div
-        key={item['data-key']}
-        className="h-8 tab"
-        onClick={() => onChange?.(item['data-key'] || '')}
-      >
-        <span>{item.label}</span>
-        {item.closable !== false && (
-          <button
-            onClick={e => {
-              e.preventDefault();
-              e.stopPropagation();
-              onEdit?.(item['data-key'] || '', 'remove');
-            }}
+    return items.map(item => {
+      if (item['data-key'] === activeKey) {
+        return (
+          <div
+            key={item['data-key']}
+            className="py-4 px-6 block hover:text-blue-500 focus:outline-none text-blue-500 border-b-2 font-medium border-blue-500"
+            onClick={() => onChange?.(item['data-key'] || '')}
           >
-            x
-          </button>
-        )}
-      </div>
-    ));
+            <span className="text-xl">{item.label}</span>
+          </div>
+        );
+      } else {
+        return (
+          <div
+            key={item['data-key']}
+            className="text-gray-200 py-4 px-6 block hover:text-blue-500 focus:outline-none"
+            onClick={() => onChange?.(item['data-key'] || '')}
+          >
+            <span className="text-xl">{item.label}</span>
+          </div>
+        );
+      }
+    });
   };
 
   const renderTab = () => {
@@ -55,13 +57,19 @@ const Tabs: React.FC<TabsProps> = props => {
   };
   return (
     <div className={c}>
-      <div className="flex flex-row flex-nowrap pl-2 gap-0.5">
-        <div className="w-6 h-6 rounded-md bg-gray-200">
-          <span className="icon-[icon-park-outline--down] text-2xl text-gray-800" />
+      <nav className="flex flex-row flex-nowrap pl-2 gap-0.5 items-center">
+        <div className="p-3 items-center">
+          <button className="m-auto w-8 h-8 flex items-center justify-center rounded-xl text-gray-700 bg-gray-200 hover:text-gray-200 hover:bg-gray-400">
+            <span
+              id="drop"
+              className="icon-[icon-park-outline--down] text-xl"
+            />
+          </button>
         </div>
         {renderPanel()}
-      </div>
-      <div className="bg-gray-300 min-h-full rounded-xl p-2">{renderTab()}</div>
+      </nav>
+      <div className="border-b-1 border-gray-600" />
+      <div className="min-h-full rounded-xl p-2">{renderTab()}</div>
     </div>
   );
 };

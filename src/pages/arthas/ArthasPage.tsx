@@ -7,6 +7,7 @@ const Arthas: React.FC = () => {
   const [activeKey, setActiveKey] = React.useState('0');
   const [items, setItems] = React.useState<TabItemProps[]>([
     { 'data-key': '0', label: '首页', closable: false, Component: HomeTab },
+    { 'data-key': '1', label: '远程1', closable: true, Component: RemoteTab },
   ]);
   const onEdit = (key: string, action: 'add' | 'remove') => {
     if (action === 'add') {
