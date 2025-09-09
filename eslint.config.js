@@ -26,6 +26,7 @@ export default tsEslint.config(
       'react-refresh': reactRefresh,
       react,
       prettier,
+      '@tanstack/query': pluginQuery,
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -40,6 +41,7 @@ export default tsEslint.config(
         { argsIgnorePattern: '^_' },
       ],
       'prettier/prettier': 'error',
+      '@tanstack/query/exhaustive-deps': 'error',
       ...prettierConfig.rules,
     },
     settings: {
